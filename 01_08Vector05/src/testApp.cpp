@@ -5,10 +5,12 @@ void testApp::setup(){
     // 画面基本設定
     ofSetFrameRate(60);
     ofBackground(63);
-    ofSetCircleResolution(32);
+    ofSetCircleResolution(4);
     
+    // 摩擦係数を設定
+    friction = 0.002;
     // 円を初期化
-    setInit();
+    setInit(ofVec2f(ofGetWidth()/2, ofGetHeight()/2));
 }
 
 //--------------------------------------------------------------
@@ -17,7 +19,7 @@ void testApp::update(){
     resetForce();
     
     // 重力を加える
-    addForce(ofVec2f(0, 0.5));
+    addForce(ofVec2f(0, 0.25));
     
     // 力の更新 (摩擦)
     updateForce();
@@ -43,11 +45,11 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 
-void testApp::setInit(){
+void testApp::setInit(ofVec2f initPos){
     // 画面内のランダムな場所と速度を円の数だけ指定
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        pos[i].x = ofGetWidth()/2;
-        pos[i].y = ofGetHeight()/4;
+        pos[i].x = initPos.x;
+        pos[i].y = initPos.y;
         float length = ofRandom(20);
         float angle = ofRandom(PI * 2);
         velocity[i].x = cos(angle) * length;
@@ -76,7 +78,7 @@ void testApp::addForce(ofVec2f _force){
 void testApp::updateForce(){
     // 力の更新 (摩擦)
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        force[i] = force[i] - velocity[i] * friction;
+        force[i] -= velocity[i] * friction;
     }
 }
 
@@ -94,16 +96,13 @@ void testApp::constrain(float xmin, float ymin, float xmax, float ymax){
     // 枠内に収める
     for (int i = 0; i < CIRCLE_NUM; i++) {
         if (pos[i].x < xmin) {
-            pos[i].x = xmin;
-        }
-        if (pos[i].y < ymin) {
-            pos[i].y = ymin;
+            pos[i].x = xmin + (xmin - pos[i].x);
         }
         if (pos[i].x > xmax) {
-            pos[i].x = xmax;
+            pos[i].x = xmax - (pos[i].x - xmax);
         }
         if (pos[i].y > ymax) {
-            pos[i].y = ymax;
+            pos[i].y = ymax - (pos[i].y - ymax);
         }
     }
 }
@@ -115,7 +114,7 @@ void testApp::checkBounds(float xmin, float ymin, float xmax, float ymax){
         if (pos[i].x < xmin || pos[i].x > xmax) {
             velocity[i].x *= -1;
         }
-        if (pos[i].y < ymin || pos[i].y > ymax) {
+        if (pos[i].y > ymax) {
             velocity[i].y *= -1;
         }
     }
@@ -123,7 +122,7 @@ void testApp::checkBounds(float xmin, float ymin, float xmax, float ymax){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    setInit();
+    ofToggleFullscreen();
 }
 
 //--------------------------------------------------------------
@@ -148,7 +147,7 @@ void testApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
-
+    setInit(ofVec2f(x, y));
 }
 
 //--------------------------------------------------------------

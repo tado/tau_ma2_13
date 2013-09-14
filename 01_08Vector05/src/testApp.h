@@ -20,7 +20,7 @@ public:
     void gotMessage(ofMessage msg);
     
     // 初期設定
-    void setInit();
+    void setInit(ofVec2f initPos);
     // 力をリセット
     void resetForce();
     // 力を加える
@@ -47,5 +47,5 @@ public:
     ofVec2f force[CIRCLE_NUM];
     
     // 摩擦係数
-    float friction = 0.01;
+    float friction;
 };
