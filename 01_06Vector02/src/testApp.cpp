@@ -7,21 +7,53 @@ void testApp::setup(){
     ofBackground(63);
     ofSetCircleResolution(32);
     
-    // 画面内のランダムな場所を指定
-    posX = ofRandom(ofGetWidth());
-    posY = ofRandom(ofGetHeight());
+    // 画面内のランダムな場所と速度を円の数だけ指定
+    for (int i = 0; i < CIRCLE_NUM; i++) {
+        position[i].x = ofRandom(ofGetWidth());
+        position[i].y = ofRandom(ofGetHeight());
+        velocity[i].set(ofRandom(-10, 10), ofRandom(-10, 10));
+        force[i].set(0, 0);
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+    // 力をリセット
+    for (int i = 0; i < CIRCLE_NUM; i++) {
+        force[i].set(0, 0);
+    }
+    
+    // 力の更新 (摩擦)
+    for (int i = 0; i < CIRCLE_NUM; i++) {
+        force[i] -= velocity[i] * friction;
+    }
+    
+    // 円の座標を全て更新
+    for (int i = 0; i < CIRCLE_NUM; i++) {
+        velocity[i] += force[i];
+        position[i] += velocity[i];
+    }
+    
+    // 画面からはみ出たらバウンドさせる
+    for (int i = 0; i < CIRCLE_NUM; i++) {
+        if (position[i].x < 0 || position[i].x > ofGetWidth()) {
+            velocity[i].x *= -1;
+        }
+        if (position[i].y < 0 || position[i].y > ofGetHeight()) {
+            velocity[i].y *= -1;
+        }
+    }
+    
 
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    // 設定した場所に円を描く
     ofSetHexColor(0x3399cc);
-    ofCircle(posX, posY, 20);
+    // 画面内のランダムな場所を円の数だけ描画
+    for (int i = 0; i < CIRCLE_NUM; i++) {
+        ofCircle(position[i], 20);
+    }
 }
 
 //--------------------------------------------------------------

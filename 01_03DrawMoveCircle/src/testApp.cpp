@@ -7,53 +7,33 @@ void testApp::setup(){
     ofBackground(63);
     ofSetCircleResolution(32);
     
-    // 画面内のランダムな場所と速度を円の数だけ指定
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        pos[i].x = ofRandom(ofGetWidth());
-        pos[i].y = ofRandom(ofGetHeight());
-        velocity[i].set(ofRandom(-10, 10), ofRandom(-10, 10));
-        force[i].set(0, 0);
-    }
+    // ランダムな場所と速度を指定
+    positionX = ofRandom(ofGetWidth());
+    positionY = ofRandom(ofGetHeight());
+    velocityX = ofRandom(-10, 10);
+    velocityY = ofRandom(-10, 10);
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    // 力をリセット
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        force[i].set(0, 0);
-    }
-    
-    // 力の更新 (摩擦)
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        force[i] = force[i] - velocity[i] * friction;
-    }
-    
-    // 円の座標を全て更新
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        velocity[i] += force[i];
-        pos[i] += velocity[i];
-    }
-    
-    // 画面からはみ出たらバウンドさせる
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        if (pos[i].x < 0 || pos[i].x > ofGetWidth()) {
-            velocity[i].x *= -1;
-        }
-        if (pos[i].y < 0 || pos[i].y > ofGetHeight()) {
-            velocity[i].y *= -1;
-        }
-    }
-    
+    // 円の座標を更新
+    positionX += velocityX;
+    positionY += velocityY;
 
+    // 画面からはみ出ないように
+    if (positionX < 0 || positionX > ofGetWidth()) {
+        velocityX *= -1;
+    }
+    if (positionY < 0 || positionY > ofGetHeight()) {
+        velocityY *= -1;
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     ofSetHexColor(0x3399cc);
-    // 画面内のランダムな場所を円の数だけ描画
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        ofCircle(pos[i], 20);
-    }
+    // 円を描画
+    ofCircle(positionX, positionY, 20);
 }
 
 //--------------------------------------------------------------

@@ -6,28 +6,17 @@ void testApp::setup(){
     ofSetFrameRate(60);
     ofBackground(63);
     ofSetCircleResolution(32);
-    
-    // 円を初期化
-    setInit();
+    setInit(); // 円を初期化
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    // 力をリセット
-    resetForce();
-    
-    // 重力を加える
-    addForce(ofVec2f(0, 0.5));
-    
-    // 力の更新 (摩擦)
-    updateForce();
-    
-    // 円の座標を全て更新
-    updatePos();
-    
+    resetForce(); // 力をリセット
+    addForce(ofVec2f(0, 0.5)); // 重力を加える
+    updateForce(); // 力の更新 (摩擦)
+    updatePos(); // 円の座標を全て更新
     // 画面からはみ出たらバウンドさせる
     checkBounds(0, 0, ofGetWidth(), ofGetHeight());
-        
     // 枠内に収める
     constrain(0, 0, ofGetWidth(), ofGetHeight());
 }
@@ -37,7 +26,7 @@ void testApp::draw(){
     ofSetHexColor(0x3399cc);
     // 画面内のランダムな場所を円の数だけ描画
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        ofCircle(pos[i], 20);
+        ofCircle(position[i], 20);
     }
 }
 
@@ -46,8 +35,8 @@ void testApp::draw(){
 void testApp::setInit(){
     // 画面内のランダムな場所と速度を円の数だけ指定
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        pos[i].x = ofGetWidth()/2;
-        pos[i].y = ofGetHeight()/2;
+        position[i].x = ofGetWidth()/2;
+        position[i].y = ofGetHeight()/2;
         velocity[i].set(ofRandom(-30, 30), ofRandom(-30, 30));
         force[i].set(0, 0);
     }
@@ -82,7 +71,7 @@ void testApp::updatePos(){
     // 円の座標を全て更新
     for (int i = 0; i < CIRCLE_NUM; i++) {
         velocity[i] += force[i];
-        pos[i] += velocity[i];
+        position[i] += velocity[i];
     }
 }
 
@@ -90,17 +79,17 @@ void testApp::updatePos(){
 void testApp::constrain(float xmin, float ymin, float xmax, float ymax){
     // 枠内に収める
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        if (pos[i].x < xmin) {
-            pos[i].x = xmin;
+        if (position[i].x < xmin) {
+            position[i].x = xmin;
         }
-        if (pos[i].y < ymin) {
-            pos[i].y = ymin;
+        if (position[i].y < ymin) {
+            position[i].y = ymin;
         }
-        if (pos[i].x > xmax) {
-            pos[i].x = xmax;
+        if (position[i].x > xmax) {
+            position[i].x = xmax;
         }
-        if (pos[i].y > ymax) {
-            pos[i].y = ymax;
+        if (position[i].y > ymax) {
+            position[i].y = ymax;
         }
     }
 }
@@ -109,10 +98,10 @@ void testApp::constrain(float xmin, float ymin, float xmax, float ymax){
 void testApp::checkBounds(float xmin, float ymin, float xmax, float ymax){
     // 画面からはみ出たらバウンドさせる
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        if (pos[i].x < xmin || pos[i].x > xmax) {
+        if (position[i].x < xmin || position[i].x > xmax) {
             velocity[i].x *= -1;
         }
-        if (pos[i].y < ymin || pos[i].y > ymax) {
+        if (position[i].y < ymin || position[i].y > ymax) {
             velocity[i].y *= -1;
         }
     }

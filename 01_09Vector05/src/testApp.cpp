@@ -5,16 +5,21 @@ void testApp::setup(){
     // 画面基本設定
     ofSetFrameRate(60);
     ofBackground(63);
-    ofSetCircleResolution(32);
+    ofSetCircleResolution(4);
     
+    // 摩擦係数を設定
+    friction = 0.002;
     // 円を初期化
-    setInit();
+    setInit(ofVec2f(ofGetWidth()/2, ofGetHeight()/2));
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     // 力をリセット
     resetForce();
+    
+    // 重力を加える
+    addForce(ofVec2f(0, 0.25));
     
     // 力の更新 (摩擦)
     updateForce();
@@ -23,7 +28,10 @@ void testApp::update(){
     updatePos();
     
     // 画面からはみ出たらバウンドさせる
-    checkBounds();
+    checkBounds(0, 0, ofGetWidth(), ofGetHeight());
+        
+    // 枠内に収める
+    constrain(0, 0, ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
@@ -31,18 +39,21 @@ void testApp::draw(){
     ofSetHexColor(0x3399cc);
     // 画面内のランダムな場所を円の数だけ描画
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        ofCircle(pos[i], 20);
+        ofCircle(position[i], 2);
     }
 }
 
 //--------------------------------------------------------------
 
-void testApp::setInit(){
+void testApp::setInit(ofVec2f initPos){
     // 画面内のランダムな場所と速度を円の数だけ指定
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        pos[i].x = ofGetWidth()/2;
-        pos[i].y = ofGetHeight()/2;
-        velocity[i].set(ofRandom(-30, 30), ofRandom(-30, 30));
+        position[i].x = initPos.x;
+        position[i].y = initPos.y;
+        float length = ofRandom(20);
+        float angle = ofRandom(PI * 2);
+        velocity[i].x = cos(angle) * length;
+        velocity[i].y = sin(angle) * length;
         force[i].set(0, 0);
     }
 }
@@ -56,10 +67,18 @@ void testApp::resetForce(){
 }
 
 //--------------------------------------------------------------
+void testApp::addForce(ofVec2f _force){
+    // 力を加える
+    for (int i = 0; i < CIRCLE_NUM; i++) {
+        force[i] += _force;
+    }
+}
+
+//--------------------------------------------------------------
 void testApp::updateForce(){
     // 力の更新 (摩擦)
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        force[i] = force[i] - velocity[i] * friction;
+        force[i] -= velocity[i] * friction;
     }
 }
 
@@ -68,18 +87,34 @@ void testApp::updatePos(){
     // 円の座標を全て更新
     for (int i = 0; i < CIRCLE_NUM; i++) {
         velocity[i] += force[i];
-        pos[i] += velocity[i];
+        position[i] += velocity[i];
     }
 }
 
 //--------------------------------------------------------------
-void testApp::checkBounds(){
+void testApp::constrain(float xmin, float ymin, float xmax, float ymax){
+    // 枠内に収める
+    for (int i = 0; i < CIRCLE_NUM; i++) {
+        if (position[i].x < xmin) {
+            position[i].x = xmin + (xmin - position[i].x);
+        }
+        if (position[i].x > xmax) {
+            position[i].x = xmax - (position[i].x - xmax);
+        }
+        if (position[i].y > ymax) {
+            position[i].y = ymax - (position[i].y - ymax);
+        }
+    }
+}
+
+//--------------------------------------------------------------
+void testApp::checkBounds(float xmin, float ymin, float xmax, float ymax){
     // 画面からはみ出たらバウンドさせる
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        if (pos[i].x < 0 || pos[i].x > ofGetWidth()) {
+        if (position[i].x < xmin || position[i].x > xmax) {
             velocity[i].x *= -1;
         }
-        if (pos[i].y < 0 || pos[i].y > ofGetHeight()) {
+        if (position[i].y > ymax) {
             velocity[i].y *= -1;
         }
     }
@@ -87,7 +122,7 @@ void testApp::checkBounds(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    setInit();
+    ofToggleFullscreen();
 }
 
 //--------------------------------------------------------------
@@ -112,7 +147,7 @@ void testApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
-
+    setInit(ofVec2f(x, y));
 }
 
 //--------------------------------------------------------------

@@ -23,7 +23,7 @@ public:
     static const int CIRCLE_NUM = 100;
     
     // 位置ベクトルの配列
-    ofVec2f pos[CIRCLE_NUM];
+    ofVec2f position[CIRCLE_NUM];
     
     // 速度ベクトルの配列
     ofVec2f velocity[CIRCLE_NUM];

@@ -9,8 +9,8 @@ void testApp::setup(){
     
     // 画面内のランダムな場所と速度を円の数だけ指定
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        pos[i].x = ofRandom(ofGetWidth());
-        pos[i].y = ofRandom(ofGetHeight());
+        position[i].x = ofRandom(ofGetWidth());
+        position[i].y = ofRandom(ofGetHeight());
         velocity[i].x = ofRandom(-10, 10);
         velocity[i].y = ofRandom(-10, 10);
     }
@@ -20,13 +20,13 @@ void testApp::setup(){
 void testApp::update(){
     // 円の座標を全て更新
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        pos[i] += velocity[i];
+        position[i] += velocity[i];
 
         // 画面からはみ出たらバウンドさせる
-        if (pos[i].x < 0 || pos[i].x > ofGetWidth()) {
+        if (position[i].x < 0 || position[i].x > ofGetWidth()) {
             velocity[i].x *= -1;
         }
-        if (pos[i].y < 0 || pos[i].y > ofGetHeight()) {
+        if (position[i].y < 0 || position[i].y > ofGetHeight()) {
             velocity[i].y *= -1;
         }
     }
@@ -37,7 +37,7 @@ void testApp::draw(){
     ofSetHexColor(0x3399cc);
     // 画面内のランダムな場所を円の数だけ描画
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        ofCircle(pos[i], 20);
+        ofCircle(position[i], 20);
     }
 }
 
