@@ -5,6 +5,10 @@ void testApp::setup(){
     // 画面基本設定
     ofSetFrameRate(60);
     ofBackground(63);
+    // 色の混合を加算合成に
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    // 円の解像度
+    ofSetCircleResolution(6);
 }
 
 //--------------------------------------------------------------
