@@ -122,7 +122,9 @@ void testApp::checkBounds(float xmin, float ymin, float xmax, float ymax){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    ofToggleFullscreen();
+    if (key == 'f') {
+        ofToggleFullscreen();
+    }
 }
 
 //--------------------------------------------------------------
