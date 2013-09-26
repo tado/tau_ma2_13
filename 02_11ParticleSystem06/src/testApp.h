@@ -22,5 +22,5 @@ public:
     
     vector<Particle> particle;
     ofImage particleImage;
-    static const int NUM = 5;
+    static const int NUM = 1;
 };

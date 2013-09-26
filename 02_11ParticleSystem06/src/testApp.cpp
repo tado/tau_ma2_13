@@ -23,13 +23,20 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     // 設定した場所に円を描く
-    ofSetHexColor(0xffffff);
+    ofBeginShape();
     for(int i = 0; i < particle.size(); i++){
         //particle[i].draw();
-        ofPoint pos = ofPoint(particle[i].position.x, particle[i].position.y);
-        particleImage.draw(pos.x-16, pos.y-16, 32, 32);
+        ofPoint pos = ofPoint(particle[i].position.x, particle[i].position.y, particle[i].position.z);
+        ofFill();
+        ofSetHexColor(0xffffff);
+        particleImage.draw(pos.x-16, pos.y-16, pos.z);
+        ofNoFill();
+        ofSetHexColor(0x666666);
+        ofCurveVertex(pos.x, pos.y, pos.z);
     }
+    ofEndShape();
     
+    ofSetHexColor(0xffffff);
     ofDrawBitmapString("particle num = " + ofToString(particle.size()), 10, 15);
     ofDrawBitmapString("fps = " + ofToString(ofGetFrameRate()), 10, 30);
 }
@@ -57,10 +64,10 @@ void testApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
     for(int i = 0; i < NUM; i++){
-        ofVec2f pos = ofVec2f(x, y);
+        ofVec3f pos = ofVec3f(x, y, 0);
         float length = ofRandom(1);
         float angle = ofRandom(PI * 2);
-        ofVec2f vel = ofVec2f(cos(angle) * length, sin(angle) * length);
+        ofVec3f vel = ofVec3f(cos(angle) * length, sin(angle) * length, ofRandom(4));
         Particle p;
         p.setup(pos, vel);
         p.radius = 2;

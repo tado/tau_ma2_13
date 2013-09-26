@@ -8,7 +8,7 @@
 
 #include "Particle.h"
 
-void Particle::setup(ofVec2f _position, ofVec2f _velocity){
+void Particle::setup(ofVec3f _position, ofVec3f _velocity){
     // 位置を設定
     position = _position;
     // 初期速度を設定
@@ -17,11 +17,11 @@ void Particle::setup(ofVec2f _position, ofVec2f _velocity){
 
 // 力をリセット
 void Particle::resetForce(){
-    force.set(0, 0);
+    force.set(0, 0, 0);
 }
 
 // 力を加える
-void Particle::addForce(ofVec2f _force){
+void Particle::addForce(ofVec3f _force){
     force = _force;
 }
 
@@ -63,6 +63,6 @@ void Particle::checkBounds(float xmin, float ymin, float xmax, float ymax){
 // 描画
 void Particle::draw(){
     ofSetHexColor(0x3399cc);
-    ofCircle(position, radius);
+    ofCircle(position.x, position.y, position.z, radius);
 }
 

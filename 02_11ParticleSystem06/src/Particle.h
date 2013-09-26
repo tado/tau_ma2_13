@@ -6,11 +6,11 @@ class Particle {
 public:
 
     // 初期設定
-    void setup(ofVec2f position, ofVec2f velocity);
+    void setup(ofVec3f position, ofVec3f velocity);
     // 力をリセット
     void resetForce();
     // 力を加える
-    void addForce(ofVec2f force);
+    void addForce(ofVec3f force);
     // 力を更新
     void updateForce();
     // 位置の更新
@@ -21,13 +21,13 @@ public:
     void draw();
     
     // 位置ベクトルの配列
-    ofVec2f position;
+    ofVec3f position;
     
     // 速度ベクトルの配列
-    ofVec2f velocity;
+    ofVec3f velocity;
     
     // 力ベクトルの配列
-    ofVec2f force;
+    ofVec3f force;
     
     // 摩擦係数
     float friction;
