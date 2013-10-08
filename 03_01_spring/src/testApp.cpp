@@ -44,9 +44,11 @@ void testApp::draw(){
 	ofSetColor(255, 255, 255);
 	
 	//ばねを描画
+    ofSetColor(191);
 	mySpring.draw();
 	
 	//particleを描画
+    ofSetHexColor(0x3399ff);
 	particle_a.draw();
 	particle_b.draw();
 }

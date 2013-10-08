@@ -8,11 +8,11 @@ void testApp::setup(){
     
     for(int i = 0; i < NUM; i++){
         ofVec2f pos = ofVec2f(ofGetWidth()/2, ofGetHeight()/2);
-        float length = ofRandom(60);
+        float length = ofRandom(20);
         float angle = ofRandom(PI * 2);
         ofVec2f vel = ofVec2f(cos(angle) * length, sin(angle) * length);
         particle[i].setup(pos, vel);
-        particle[i].radius = 4;
+        particle[i].radius = 3;
         particle[i].friction = 0.01;
     }
 }
@@ -24,13 +24,14 @@ void testApp::update(){
         particle[i].addForce(ofVec2f(0, 0.25));
         particle[i].updateForce();
         particle[i].updatePos();
-        particle[i].checkBounds(0, -1000, ofGetWidth(), ofGetHeight());
+        particle[i].bounceOffWalls();
     }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     // 設定した場所に円を描く
+    ofSetHexColor(0x3399ff);
     for(int i = 0; i < NUM; i++){
         particle[i].draw();
     }
@@ -38,7 +39,10 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    ofToggleFullscreen();
+    // fキーでフルスクリーンに
+    if (key == 'f') {
+        ofToggleFullscreen();
+    }
 }
 
 //--------------------------------------------------------------
@@ -65,7 +69,7 @@ void testApp::mousePressed(int x, int y, int button){
 void testApp::mouseReleased(int x, int y, int button){
     for(int i = 0; i < NUM; i++){
         ofVec2f pos = ofVec2f(x, y);
-        float length = ofRandom(60);
+        float length = ofRandom(20);
         float angle = ofRandom(PI * 2);
         ofVec2f vel = ofVec2f(cos(angle) * length, sin(angle) * length);
         particle[i].setup(pos, vel);

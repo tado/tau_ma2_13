@@ -1,11 +1,3 @@
-//
-//  Particle.cpp
-//  OneParticleClass
-//
-//  Created by Tadokoro Atsushi on 2013/09/24.
-//
-//
-
 #include "Particle.h"
 
 void Particle::draw(){

@@ -11,7 +11,8 @@ void testApp::setup(){
 
     for (int i = 0; i < 200; i++){
 		Particle myParticle;
-        myParticle.friction = 0.03;
+        myParticle.friction = 0.02;
+        myParticle.radius = 2;
 		float x = 500 + 100 * cos ( (i / 200.0) * TWO_PI);
 		float y = 500 + 100 * sin ( (i / 200.0) * TWO_PI);
         myParticle.setup(ofVec2f(x, y), ofVec2f(0, 0));
@@ -39,10 +40,10 @@ void testApp::update(){
 	for (int i = 0; i < particles.size(); i++){
         if(pressed){
             // マウスの位置に反発する力
-            particles[i].addAttractionForce(mouseX, mouseY, 200, 0.7f);
+            particles[i].addAttractionForce(mouseX, mouseY, 200, 1.0);
         } else {
             // マウスの位置に引きつけられる力
-            particles[i].addRepulsionForce(mouseX, mouseY, 200, 0.7f);
+            particles[i].addRepulsionForce(mouseX, mouseY, 200, 1.0);
         }
 		for (int j = 0; j < i; j++){
 			particles[i].addRepulsionForce(particles[j], 50, 0.1);

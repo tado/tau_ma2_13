@@ -12,15 +12,16 @@ void testApp::setup(){
     //particleの配列を生成
     for (int i = 0; i < 20; i++) {
         Particle p;
-        p.friction = 0.03;
-        p.setup(ofVec2f(ofRandom(400, 450), ofRandom(400, 450)), ofVec2f(0,0));
+        p.radius = 5;
+        p.friction = 0.01;
+        p.setup(ofVec2f(ofGetWidth()/2, i * 20 + 100), ofVec2f(0,0));
         particles.push_back(p);
     }
     
 	//全ての配列を順番にspringで接続していく
 	for (int i = 0; i < (particles.size()-1); i++){
 		Spring mySpring;
-		mySpring.distance = 25;
+		mySpring.distance = 20;
 		mySpring.springiness = 0.2;
 		mySpring.particleA = &(particles[i]);
 		mySpring.particleB = &(particles[(i+1) % particles.size()]);
@@ -42,8 +43,8 @@ void testApp::update(){
 	
 	//パーティクルの状態を更新 (壁でバウンド)
     for (int i = 0; i < particles.size(); i++){
-        particles[i].addForce(ofVec2f(0, 0.1));
         particles[i].updateForce();
+        particles[i].addForce(ofVec2f(0, 0.1));
         particles[i].bounceOffWalls();
         particles[i].update();
     }

@@ -7,11 +7,12 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 	ofSetFrameRate(60);
 	ofBackground(0, 0, 0);
+    ofSetCircleResolution(3);
 	
 	//パーティクルを10000個生成
 	for (int i = 0; i < 5000; i++){
 		Particle myParticle;
-        myParticle.friction = 0.001;
+        myParticle.friction = 0.01;
         myParticle.radius = 2;
 		myParticle.setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())), ofVec2f(0, 0));
 		particles.push_back(myParticle);
@@ -39,6 +40,7 @@ void testApp::update(){
 		//Particleの状態を更新
 		particles[i].addForce(ofVec2f(force.x, force.y));
 		particles[i].updateForce();
+        particles[i].bounceOffWalls();
 		particles[i].update();
 	}
 	
@@ -82,6 +84,7 @@ void testApp::draw(){
 	
 	//ベクトル場に配置されたparticleを描画
     ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(0, 127, 255);
     for (int i = 0; i < particles.size(); i++){
 		particles[i].draw();
 	}

@@ -1,12 +1,22 @@
 #include "Particle.h"
 
+Particle::Particle(){
+    radius = 5.0;
+    friction = 0.01;
+    bFixed = false;
+}
+
 void Particle::setup(ofVec2f _position, ofVec2f _velocity){
     // 位置を設定
     position = _position;
     // 初期速度を設定
     velocity = _velocity;
-    radius = 5.0;
-    friction = 0.01;
+}
+void Particle::setup(float positionX, float positionY, float velocityX, float velocityY){
+    // 位置を設定
+    position = ofVec2f(positionX, positionY);
+    // 初期速度を設定
+    velocity = ofVec2f(velocityX, velocityY);
 }
 
 // 力をリセット
@@ -18,14 +28,11 @@ void Particle::resetForce(){
 void Particle::addForce(ofVec2f _force){
     force += _force;
 }
-
-// 力の更新と座標の更新をupdateとしてまとめる
-void Particle::update(){
-    updateForce();
-    updatePos();
+void Particle::addForce(float forceX, float forceY){
+    force += ofVec2f(forceX, forceY);
 }
 
-// 力の更新
+// 摩擦力の更新
 void Particle::updateForce(){
     force -= velocity * friction;
 }
@@ -38,9 +45,16 @@ void Particle::updatePos(){
     }
 }
 
+// 力の更新と座標の更新をupdateとしてまとめる
+void Particle::update(){
+    updateForce();
+    updatePos();
+}
+
+
 // 画面の端でバウンドする(改定版)
 void Particle::bounceOffWalls(){
-	bool bDampedOnCollision = true;
+	bool bDampedOnCollision = false;
 	bool bDidICollide = false;
 	
 	float minx = 0;
@@ -76,7 +90,6 @@ void Particle::bounceOffWalls(){
 
 // 描画
 void Particle::draw(){
-    ofSetHexColor(0x3399cc);
     ofCircle(position, radius);
 }
 
@@ -177,7 +190,7 @@ void Particle::addCounterClockwiseForce(Particle &p, float radius, float scale){
     }
     
 	if (bAmCloseEnough == true){
-		float pct = 1 - (length / radius);  // stronger on the inside
+		float pct = 1 - (length / radius);
 		diff.normalize();
 		force.x = force.x + diff.y * scale * pct;
         force.y = force.y - diff.x * scale * pct;

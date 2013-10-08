@@ -23,6 +23,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     // 設定した場所に円を描く
+    ofSetHexColor(0x3399cc);
     for(int i = 0; i < particle.size(); i++){
         particle[i].draw();
     }

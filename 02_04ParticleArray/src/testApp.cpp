@@ -9,7 +9,7 @@ void testApp::setup(){
     for(int i = 0; i < NUM; i++){
         float posX = ofRandom(ofGetWidth());
         float posY = ofRandom(ofGetHeight());
-        particle[i].setup(ofVec2f(posX, posY));
+        particle[i].setup(ofVec2f(posX, posY), ofVec2f(0,0));
     }
 }
 

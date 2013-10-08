@@ -8,13 +8,16 @@ void testApp::setup(){
 	ofSetFrameRate(60);
 	ofBackground(0, 0, 0);
 	ofSetBackgroundAuto(false);
+    ofSetCircleResolution(4);
     ofEnableAlphaBlending();
 
 	
-	for (int i = 0; i < 3000; i++){
-		Particle myParticle;
-		myParticle.setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())), ofVec2f(0, 0));
-		particles.push_back(myParticle);
+	for (int i = 0; i < 20000; i++){
+		Particle p;
+		p.setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())), ofVec2f(0, 0));
+        p.radius = 1;
+        p.friction = 0.01;
+		particles.push_back(p);
 	}
 	
 	VF.setupField(60,40,ofGetWidth(), ofGetHeight());
@@ -41,18 +44,21 @@ void testApp::update(){
 	}
 	
 	//ベクトル場の力の減衰
-	VF.fadeField(0.998f);
+	VF.fadeField(1.0);
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	ofSetColor(0, 0, 0, 10);
+	ofSetColor(0, 0, 0, 3);
 	ofRect(0, 0, ofGetWidth(), ofGetHeight());
 
 	//ベクトル場に配置されたparticleを描画
+    ofSetColor(15, 63, 127);
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
 	for (int i = 0; i < particles.size(); i++){
 		particles[i].draw();
 	}
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 }
 
 //--------------------------------------------------------------
@@ -69,6 +75,10 @@ void testApp::keyPressed  (int key){
                 particles[i].setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())), ofVec2f(0, 0));
 			}
 			break;
+            
+        case 'r':
+            VF.randomizeField(2.0);
+            break;
 	} 
 }
 

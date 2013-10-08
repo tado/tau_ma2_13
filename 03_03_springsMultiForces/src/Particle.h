@@ -4,13 +4,16 @@
 class Particle {
 
 public:
-
+    //コンストラクタ
+    Particle();
     // 初期設定
     void setup(ofVec2f position, ofVec2f velocity);
+    void setup(float positionX, float positionY, float velocityX, float velocityY);
     // 力をリセット
     void resetForce();
     // 力を加える
     void addForce(ofVec2f force);
+    void addForce(float forceX, float forceY);
     // 力を更新
     void updateForce();
     // 位置の更新
