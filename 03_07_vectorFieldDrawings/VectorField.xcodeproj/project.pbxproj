@@ -66,7 +66,7 @@
 		187502D01803A3FB00EB9F55 /* vectorField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectorField.h; sourceTree = "<group>"; };
 		187502D31803A4E500EB9F55 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		187502D41803A4E500EB9F55 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
-		187502D71803A78200EB9F55 /* VectorFieldDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VectorFieldDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		187502D71803A78200EB9F55 /* VectorField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = VectorField.app; path = /Users/tado/Documents/openFrameworks/of_v0.8.0_osx_release/apps/tau_ma2_13/03_07_vectorFieldDrawings/bin/VectorField.app; sourceTree = "<absolute>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -183,7 +183,6 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				187502D71803A78200EB9F55 /* VectorFieldDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,7 +228,7 @@
 			);
 			name = VectorField;
 			productName = myOFApp;
-			productReference = 187502D71803A78200EB9F55 /* VectorFieldDebug.app */;
+			productReference = 187502D71803A78200EB9F55 /* VectorField.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

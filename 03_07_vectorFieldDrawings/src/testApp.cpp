@@ -20,8 +20,8 @@ void testApp::setup(){
 		particles.push_back(p);
 	}
 	
-	VF.setupField(60,40,ofGetWidth(), ofGetHeight());
-	
+	VF.setupField(120,80,ofGetWidth(), ofGetHeight());
+    VF.randomizeField(1.0);
 }
 
 //--------------------------------------------------------------
@@ -49,11 +49,11 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	ofSetColor(0, 0, 0, 3);
+	ofSetColor(0, 0, 0, 5);
 	ofRect(0, 0, ofGetWidth(), ofGetHeight());
 
 	//ベクトル場に配置されたparticleを描画
-    ofSetColor(15, 63, 127);
+    ofSetColor(15, 31, 63);
     ofEnableBlendMode(OF_BLENDMODE_ADD);
 	for (int i = 0; i < particles.size(); i++){
 		particles[i].draw();
@@ -77,7 +77,7 @@ void testApp::keyPressed  (int key){
 			break;
             
         case 'r':
-            VF.randomizeField(2.0);
+            VF.randomizeField(1.0);
             break;
 	} 
 }
