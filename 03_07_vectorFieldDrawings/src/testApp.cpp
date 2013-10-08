@@ -15,7 +15,7 @@ void testApp::setup(){
 	for (int i = 0; i < 50000; i++){
 		Particle p;
         float angle, length;
-        length = ofRandom(10);
+        length = ofRandom(3);
         angle = ofRandom(PI * 2.0);
         ofVec2f pos;
         pos.x = cos(angle) * length + ofGetWidth()/2;
@@ -27,7 +27,7 @@ void testApp::setup(){
 	}
 	
 	VF.setupField(400,200,ofGetWidth(), ofGetHeight());
-    VF.randomizeField(0.05);
+    VF.randomizeField(0.1);
 }
 
 //--------------------------------------------------------------
@@ -55,7 +55,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	ofSetColor(0, 0, 0, 15);
+	ofSetColor(0, 0, 0, 23);
 	ofRect(0, 0, ofGetWidth(), ofGetHeight());
 
 	//ベクトル場に配置されたparticleを描画
@@ -79,7 +79,7 @@ void testApp::keyPressed  (int key){
 			//パーティクルの場所を初期化
             for (int i = 0; i < particles.size(); i++){
                 float angle, length;
-                length = ofRandom(10);
+                length = ofRandom(3);
                 angle = ofRandom(PI * 2.0);
                 ofVec2f pos;
                 pos.x = cos(angle) * length + ofGetWidth()/2;
