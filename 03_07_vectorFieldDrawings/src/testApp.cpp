@@ -8,8 +8,8 @@ void testApp::setup(){
 	ofSetFrameRate(60);
 	ofBackground(0, 0, 0);
 	ofSetBackgroundAuto(false);
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofSetCircleResolution(3);
-    ofEnableAlphaBlending();
 
 	// 画面の中心付近にパーティクルを配置
 	for (int i = 0; i < 50000; i++){
@@ -28,6 +28,7 @@ void testApp::setup(){
 	
 	VF.setupField(400,200,ofGetWidth(), ofGetHeight());
     VF.randomizeField(0.1);
+    //ofHideCursor();
 }
 
 //--------------------------------------------------------------
@@ -55,16 +56,17 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	ofSetColor(0, 0, 0, 23);
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    ofSetColor(0,15);
 	ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
 
 	//ベクトル場に配置されたparticleを描画
-    ofSetColor(15, 63, 127);
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(15,31,63);
+
 	for (int i = 0; i < particles.size(); i++){
 		particles[i].draw();
 	}
-    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 }
 
 //--------------------------------------------------------------
@@ -110,8 +112,8 @@ void testApp::mouseDragged(int x, int y, int button){
 	float diffy = y - prevMouseY;
 	
 	//VF.addVectorCircle((float)x, (float)y, diffx*0.3, diffy*0.3, 10, 0.3);
-    //VF.addClockwiseCircle(x, y, 100, 0.05);
-    VF.addInwardCircle(x,y, 200, 0.02);
+    VF.addClockwiseCircle(x, y, 100, 0.01);
+    //VF.addInwardCircle(x,y, 100, 0.01);
 	
 	prevMouseX = x;
 	prevMouseY = y;
@@ -119,10 +121,7 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-	prevMouseX = x; 
-	prevMouseY = y;
-    VF.addInwardCircle(x,y, 100, 0.1);
-    //VF.addClockwiseCircle(x, y, 100, 0.05);
+
 }
 
 //--------------------------------------------------------------

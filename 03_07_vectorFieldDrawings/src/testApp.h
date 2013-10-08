@@ -28,7 +28,6 @@ public:
 	
 	float prevMouseX;
 	float prevMouseY;
-
 };
 
 #endif
