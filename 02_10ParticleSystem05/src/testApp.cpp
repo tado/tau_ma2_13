@@ -29,7 +29,7 @@ void testApp::draw(){
         ofPoint pos = ofPoint(particle[i].position.x, particle[i].position.y);
         ofSetHexColor(0xffffff);
         particleImage.draw(pos.x-16, pos.y-16, 32, 32);
-        ofSetHexColor(0x999999);
+        ofSetHexColor(0x333333);
         ofCurveVertex(pos.x, pos.y);
     }
     ofEndShape();
