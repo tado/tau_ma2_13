@@ -8,7 +8,7 @@ void testApp::setup(){
 	ofSetFrameRate(60);
 	ofBackground(0, 0, 0);
 	ofSetBackgroundAuto(false);
-    ofSetCircleResolution(4);
+    ofSetCircleResolution(3);
     ofEnableAlphaBlending();
 
 	// 画面の中心付近にパーティクルを配置
@@ -21,13 +21,13 @@ void testApp::setup(){
         pos.x = cos(angle) * length + ofGetWidth()/2;
         pos.y = sin(angle) * length + ofGetHeight()/2;
         p.setup(pos, ofVec2f(0, 0));
-        p.radius = 1;
-        p.friction = 0.01;
+        p.radius = 1.2;
+        p.friction = 0.001;
 		particles.push_back(p);
 	}
 	
 	VF.setupField(400,200,ofGetWidth(), ofGetHeight());
-    VF.randomizeField(1.0);
+    VF.randomizeField(0.05);
 }
 
 //--------------------------------------------------------------
@@ -86,10 +86,11 @@ void testApp::keyPressed  (int key){
                 pos.y = sin(angle) * length + ofGetHeight()/2;
                 particles[i].setup(pos, ofVec2f(0, 0));
 			}
+            VF.randomizeField(0.1);
 			break;
             
         case 'r':
-            VF.randomizeField(1.0);
+            VF.randomizeField(0.1);
             break;
 	}
 }
