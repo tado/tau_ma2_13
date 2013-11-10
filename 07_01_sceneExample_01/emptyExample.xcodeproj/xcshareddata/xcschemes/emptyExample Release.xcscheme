@@ -15,16 +15,16 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "ofxBox2dExample.app"
-               BlueprintName = "ofxBox2dExample"
-               ReferencedContainer = "container:ofxBox2dExample.xcodeproj">
+               BuildableName = "emptyExample.app"
+               BlueprintName = "emptyExample"
+               ReferencedContainer = "container:emptyExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Release">
       <Testables>
@@ -33,15 +33,15 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxBox2dExample.app"
-            BlueprintName = "ofxBox2dExample"
-            ReferencedContainer = "container:ofxBox2dExample.xcodeproj">
+            BuildableName = "emptyExample.app"
+            BlueprintName = "emptyExample"
+            ReferencedContainer = "container:emptyExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
    <LaunchAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxBox2dExample.app"
-            BlueprintName = "ofxBox2dExample"
-            ReferencedContainer = "container:ofxBox2dExample.xcodeproj">
+            BuildableName = "emptyExample.app"
+            BlueprintName = "emptyExample"
+            ReferencedContainer = "container:emptyExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxBox2dExample.app"
-            BlueprintName = "ofxBox2dExample"
-            ReferencedContainer = "container:ofxBox2dExample.xcodeproj">
+            BuildableName = "emptyExample.app"
+            BlueprintName = "emptyExample"
+            ReferencedContainer = "container:emptyExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
