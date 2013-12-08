@@ -195,15 +195,15 @@
 			isa = PBXGroup;
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
+				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				1890D075182E3E0800BBEC2A /* baseScene.h */,
-				1890D076182E3E0800BBEC2A /* SceneA.cpp */,
 				1890D077182E3E0800BBEC2A /* SceneA.h */,
-				1890D078182E3E0800BBEC2A /* SceneB.cpp */,
+				1890D076182E3E0800BBEC2A /* SceneA.cpp */,
 				1890D079182E3E0800BBEC2A /* SceneB.h */,
-				1890D07A182E3E0800BBEC2A /* SceneC.cpp */,
+				1890D078182E3E0800BBEC2A /* SceneB.cpp */,
 				1890D07B182E3E0800BBEC2A /* SceneC.h */,
+				1890D07A182E3E0800BBEC2A /* SceneC.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

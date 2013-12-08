@@ -26,3 +26,11 @@ public:
 	//現在のシーン番号
 	int currentScene;
 };
+
+
+
+
+
+
+
+

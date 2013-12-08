@@ -12,7 +12,7 @@ void testApp::setup(){
     ofSetCircleResolution(3);
 
 	// 画面の中心付近にパーティクルを配置
-	for (int i = 0; i < 50000; i++){
+	for (int i = 0; i < 20000; i++){
 		Particle p;
         float angle, length;
         length = ofRandom(3);
@@ -22,12 +22,12 @@ void testApp::setup(){
         pos.y = sin(angle) * length + ofGetHeight()/2;
         p.setup(pos, ofVec2f(0, 0));
         p.radius = 1.2;
-        p.friction = 0.001;
+        p.friction = 0.005;
 		particles.push_back(p);
 	}
 	
 	VF.setupField(400,200,ofGetWidth(), ofGetHeight());
-    VF.randomizeField(0.1);
+    VF.randomizeField(0.4);
     //ofHideCursor();
 }
 
